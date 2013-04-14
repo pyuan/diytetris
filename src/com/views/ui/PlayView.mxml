@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" xmlns:ui="com.views.ui.*" show="onShow();"
+	creationComplete="init();" xmlns:ns="com.views.ui.view_pane.*">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import caurina.transitions.Tweener;
+			import com.controllers.ApplicationController;
+			import com.controllers.AudioController;
+			import com.models.Model;
+			import com.controllers.GameController;
+			import com.Constants;
+			import com.Embeds;
+			import mx.binding.utils.BindingUtils;
+			import com.utils.ColorUtil;
+			import com.utils.StringUtil;
+			
+			private function init():void
+			{
+				ApplicationController.SINGLETON.initControllers();
+				BindingUtils.bindSetter(updateColors, ApplicationController.SINGLETON.model, "bgAvgColor");
+				BindingUtils.bindSetter(updatePoints, ApplicationController.SINGLETON.model, "points");
+				BindingUtils.bindSetter(updateLevel, ApplicationController.SINGLETON.model, "level");
+				BindingUtils.bindSetter(updateTime, ApplicationController.SINGLETON.model, "levelTime");
+			}
+			
+			private function updatePoints(pts:int):void
+			{
+				scorePane.displayTxt = pts.toString();
+				updateObjective();
+			}
+			
+			private function updateLevel(l:int):void
+			{
+				levelPane.level = l;
+				updateObjective();
+			}
+			
+			private function updateObjective():void
+			{
+				var model:Model = Model.getInstance();
+				objectivesPane.displayTxt = StringUtil.getObjectiveTxt(model.level);
+			}
+			
+			private function updateTime(t:int):void
+			{
+				timePane.displayTxt = t.toString();
+			}
+			
+			private function updateColors(bgColor:uint):void
+			{
+				var compColor:uint = ColorUtil.getComplementaryColor(bgColor);
+				levelPane.bgColor =  timePane.bgColor = scorePane.bgColor = objectivesPane.bgColor = compColor;
+			}
+			
+			private function onShow():void
+			{
+				ApplicationController.SINGLETON.enterEditMode(false);
+			}
+			
+			public function animate():void
+			{
+				var t:Number = 1;
+				var tran:String = 'easeOutBounce';
+				
+				AudioController.SINGLETON.playSfx(Constants.AUDIO_MACHINE);
+				
+				mainPane.rotationY = timePane.rotationY = scorePane.rotationY = 90;
+				Tweener.addTween(mainPane, {rotationY: 0, time:t, transition: tran});
+				Tweener.addTween(timePane, {rotationY: 0, time:t, transition: tran});
+				Tweener.addTween(scorePane, {rotationY: 0, time:t, transition: tran});
+				
+				levelPane.rotationY = objectivesPane.rotationY = -90;
+				Tweener.addTween(levelPane, {rotationY: 0, time:t, transition: tran});
+				Tweener.addTween(objectivesPane, {rotationY: 0, time:t, transition: tran});
+			}
+			
+			public function animateScore():void
+			{
+				Tweener.addTween(scorePane, {rotationY: 90, time: 0.25, transition: 'easeInQuad', onComplete: function():void{
+					Tweener.addTween(scorePane, {rotationY: 0, time: 0.5, transition: 'easeOutBounce'});
+				}});
+			}
+			
+			public function showPopup(popupId:String):void
+			{
+				popups.visible = true;
+				popups.selectedChild = popups.getChildByName(popupId) as Canvas;
+			}
+			
+			public function hidePopup():void
+			{
+				popups.visible = false;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="container" width="1024" height="768" horizontalCenter="0" verticalCenter="0"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<ns:ObjectivePane id="objectivesPane" right="0" y="{mainPane.y + mainPane.height + 141}"/>
+		
+		<ns:LevelPane id="levelPane" right="20" y="{mainPane.y + mainPane.height - 31}"/>
+				
+		<ns:ScorePane id="scorePane" x="{scorePane.width + 76}" y="{mainPane.y + mainPane.height + 248}"/>
+		
+		<ns:TimePane id="timePane" x="{timePane.width + 80}" y="{mainPane.y + mainPane.height + 39}"/>
+		
+		<ns:MainPane id="mainPane" x="{mainPane.width + 11}" y="{frame.y + 53}"/>
+		
+		<ui:ViewPane id="viewPane" x="252" verticalCenter="17" />
+	
+		<mx:Image id="frame" source="{Embeds.IMAGE_FRAME}" x="167" verticalCenter="0" mouseEnabled="false"
+			maintainAspectRatio="true" smoothBitmapContent="true" mouseChildren="false"/>
+				
+	</mx:Canvas>
+	
+	<mx:ViewStack id="popups" width="100%" height="100%" visible="false">
+		<ui:Pause name="pause"/>
+		<ui:ConfirmQuit name="confirmQuit"/>
+	</mx:ViewStack>
+	
+</mx:Canvas>

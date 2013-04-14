@@ -1,0 +1,106 @@
+/*** Embedded fonts ***/
+/**** Helvetica ****/
+@font-face {
+	src:url("assets/fonts/HelveticaNeueLTStd-Lt.otf");
+	fontFamily: HelveticaRegular;
+	font-weight: normal;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+}
+@font-face {
+	src:url("assets/fonts/HelveticaNeueLTStd-Bd.otf");
+	fontFamily: HelveticaBold;
+	font-weight: bold;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+} 
+@font-face {
+	src:url("assets/fonts/HelveticaNeueLTStd-BdCn.otf");
+	fontFamily: HelveticaBoldCondensed;
+	font-weight: bold;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+} 
+@font-face {
+	src:url("assets/fonts/HelveticaNeueLTStd-Th.otf");
+	fontFamily: HelveticaLight;
+	font-weight: normal;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+} 
+
+/**** Bauhaus ****/
+@font-face {
+	src:url("assets/fonts/BAUHAUSB.TTF");
+	fontFamily: BauhausBold;
+	font-weight: bold;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+}
+@font-face {
+	src:url("assets/fonts/BAUHAUSH.TTF");
+	fontFamily: BauhausHeavy;
+	font-weight: normal;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+} 
+@font-face {
+	src:url("assets/fonts/BAUHAUSL.TTF");
+	fontFamily: BauhausLight;
+	font-weight: normal;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+} 
+@font-face {
+	src:url("assets/fonts/BAUHAUSM.TTF");
+	fontFamily: BauhausMedium;
+	font-weight: normal;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+}
+@font-face {
+	src:url("assets/fonts/BAUHS93.TTF");
+	fontFamily: BauhausRegular;
+	font-weight: normal;
+	font-anti-alias-type: advanced;
+	unicode-range:
+    	U+0020-U+0040, /* Punctuation, Numbers and Symbols */
+        U+0041-U+005A, /* Upper-Case A-Z */
+        U+0061-U+007A; /* Lower-Case a-z */
+}
+/*** End of Embedded fonts ***/
+
+
+
+
+
+
+
+
+
+
+

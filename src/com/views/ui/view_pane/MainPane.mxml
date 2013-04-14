@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="224" height="188"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" clipContent="false" xmlns:ui="com.views.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.Constants;
+			import com.Embeds;
+			import com.controllers.GameController;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas backgroundImage="assets/images/bg_main.png" width="100%" height="100%"
+		x="{-this.width}" verticalCenter="0" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<mx:Image source="{Constants.IMAGE_LOGO_SMALL}" smoothBitmapContent="true"
+			horizontalCenter="-15" y="10" width="195"/> 
+		
+		<mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="-10"
+			horizontalGap="5" verticalAlign="middle" y="115">
+			
+			<ui:SmallIconButton icon="{Embeds.ICON_SMALL_QUIT}" 
+				click="GameController.SINGLETON.quitGame();"/>
+			
+			<ui:SmallIconButton icon="{Embeds.ICON_SMALL_SKIP}" 
+				click="GameController.SINGLETON.getNewLevel(true);"/>
+			
+			<ui:SmallIconButton icon="{Embeds.ICON_SMALL_PAUSE}" 
+				click="GameController.SINGLETON.pause();"/>
+			
+			<ui:AudioButtonSmall/>
+			
+		</mx:HBox>
+		
+	</mx:Canvas>
+	
+</mx:Canvas>

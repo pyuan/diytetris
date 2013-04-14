@@ -1,0 +1,194 @@
+/* CSS file */
+.introButton
+{
+	font-anti-alias-type: advanced;
+	font-family: BauhausRegular;
+	font-weight: normal;
+	font-size: 50;
+	text-roll-over-color: #ffc901;
+	text-selected-color: #ffa544;
+	disabled-color: #888888;
+	color: #ffa544;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	up-skin:
+        Embed(source="/assets/images/introButton_up.png",
+        scaleGridLeft="13", scaleGridTop="13", 
+        scaleGridRight="30", scaleGridBottom="37");
+    over-skin:
+        Embed(source="/assets/images/introButton_down.png",
+        scaleGridLeft="13", scaleGridTop="13", 
+        scaleGridRight="30", scaleGridBottom="37");
+    down-skin:
+    	Embed(source="/assets/images/introButton_up.png",
+        scaleGridLeft="13", scaleGridTop="13", 
+        scaleGridRight="30", scaleGridBottom="37");
+    disabled-skin:
+    	Embed(source="/assets/images/introButton_disabled.png",
+        scaleGridLeft="13", scaleGridTop="13", 
+        scaleGridRight="30", scaleGridBottom="37");
+}
+
+.smallIconButton
+{
+	font-anti-alias-type: advanced;
+	font-family: BauhausRegular;
+	font-weight: normal;
+	font-size: 20;
+	text-roll-over-color: #ffc901;
+	text-selected-color: #ffa544;
+	disabled-color: #888888;
+	color: #ffa544;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	up-skin:
+        Embed(source="/assets/images/small_btn_up.png",
+        scaleGridLeft="8", scaleGridTop="8", 
+        scaleGridRight="31", scaleGridBottom="31");
+    over-skin:
+        Embed(source="/assets/images/small_btn_over.png",
+        scaleGridLeft="8", scaleGridTop="8", 
+        scaleGridRight="31", scaleGridBottom="31");
+    down-skin:
+    	Embed(source="/assets/images/small_btn_up.png",
+        scaleGridLeft="8", scaleGridTop="8", 
+        scaleGridRight="31", scaleGridBottom="31");
+    disabled-skin:
+    	Embed(source="/assets/images/small_btn_disabled.png",
+        scaleGridLeft="8", scaleGridTop="8", 
+        scaleGridRight="31", scaleGridBottom="31");
+}
+
+.overlay
+{
+	background-color: #000000;
+	background-alpha: 0.75; 
+	border-style: solid;
+	border-thickness: 0;
+	corner-radius: 25;
+	padding-bottom: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 50px;
+	drop-shadow-enabled: true;
+	drop-shadow-color: #000000;
+	shadow-color: #000000;
+	shadow-direction: right;
+	shadow-distance: 5;
+}
+
+.infoBoxHeader
+{
+	font-anti-alias-type: advanced;
+	font-family: BauhausRegular;
+	font-weight: normal;
+	font-size:24;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.leaderCellTxt
+{
+	font-anti-alias-type: advanced;
+	font-family: BauhausRegular;
+	font-weight: normal;
+	font-size: 24;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+.failTxt
+{
+	font-anti-alias-type: advanced;
+	font-family: BauhausRegular;
+	font-weight: normal;
+	font-size: 35;
+	color: #cce9f8;
+	text-align: left;
+}
+
+.scoreTxt
+{
+	font-anti-alias-type: advanced;
+	font-family: HelveticaBoldCondensed;
+	font-weight: bold;
+	font-size: 20;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.objectiveTxt
+{
+	font-anti-alias-type: advanced;
+	font-family: BauhausRegular;
+	font-weight: normal;
+	font-size:20;
+	color: #FFFFFF;
+	text-align: center;
+	fontSize: 20; 
+	paddingLeft: 5; 
+	paddingTop: 5; 
+	paddingRight: 5;
+	paddingBottom: 5;
+}
+
+ScrollBar 
+{
+ 	up-arrow-skin: ClassReference(null);
+ 	down-arrow-skin: ClassReference(null);
+ 	trackSkin: Embed(source="assets/images/scrollbar/track.png", 
+ 		scaleGridLeft="2", scaleGridTop="4", scaleGridRight="3", scaleGridBottom="19");
+ 	thumbUpSkin: Embed(source="assets/images/scrollbar/thumb_up.png", 
+ 		scaleGridLeft="2", scaleGridTop="4", scaleGridRight="3", scaleGridBottom="19");
+ 	thumbOverSkin: Embed(source="assets/images/scrollbar/thumb_over.png", 
+ 		scaleGridLeft="2", scaleGridTop="4", scaleGridRight="3", scaleGridBottom="19");
+ 	thumbDownSkin: Embed(source="assets/images/scrollbar/thumb_down.png", 
+ 		scaleGridLeft="2", scaleGridTop="4", scaleGridRight="3", scaleGridBottom="19");
+}
+
+ComboBox
+{
+	dropdownStyleName: "comboDropDown";
+	fontFamily: BauhausBold;
+	font-anti-alias-type: advanced;
+	font-style: bold;
+	font-size: 16;
+	color: #ffffff;
+	/*rollOverColor: #ff7200;
+	selectionColor: #b31c1c;*/
+	disabledSkin: Embed(source="assets/images/combobox/bg_disabled.png", 
+		scaleGridLeft="8", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="12");
+  	downSkin: Embed(source="assets/images/combobox/bg_up.png", 
+		scaleGridLeft="8", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="12");
+  	overSkin: Embed(source="assets/images/combobox/bg_over.png", 
+		scaleGridLeft="8", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="12");
+  	upSkin: Embed(source="assets/images/combobox/bg_up.png", 
+		scaleGridLeft="8", scaleGridTop="8", scaleGridRight="12", scaleGridBottom="12");
+}
+
+.comboDropDown
+{
+	backgroundColor: #000000;
+	backgroundAlpha: 0.85;
+	border-thickness: 0;
+	padding-bottom: 5;
+	padding-left: 5;
+	padding-right: 5;
+	padding-top: 5;
+	cornerRadius: 5;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

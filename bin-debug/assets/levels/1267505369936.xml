@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<level>
+	<block>
+		<x>5</x>
+		<y>10</y>
+		<color>0</color>
+	</block>
+	<block>
+		<x>6</x>
+		<y>10</y>
+		<color>0</color>
+	</block>
+	<block>
+		<x>7</x>
+		<y>10</y>
+		<color>0</color>
+	</block>
+</level>

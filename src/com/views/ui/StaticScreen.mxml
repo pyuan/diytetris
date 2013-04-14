@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalCenter="0" verticalCenter="0"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	xmlns:ui="com.views.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.Embeds;
+			import com.Constants;
+			import com.controllers.ApplicationController;
+			
+			[Bindable]
+			public var screenImage:String = "";
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Fade id="fade" duration="250" alphaFrom="0" alphaTo="1"/>
+	
+	<ui:Logo id="logo"/>
+	
+	<mx:VBox id="container" horizontalCenter="0" verticalCenter="0" visible="{this.visible}" 
+		styleName="overlay" clipContent="true" showEffect="fade"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		verticalGap="50" horizontalAlign="center">
+		
+		<mx:Image source="{screenImage}" maintainAspectRatio="true" smoothBitmapContent="true"/>
+		
+		<ui:IntroButton label="" icon="{Embeds.ICON_HOME}"
+			click="ApplicationController.SINGLETON.switchView(Constants.VIEW_MAIN);"/>
+	
+	</mx:VBox>
+	
+</mx:Canvas>

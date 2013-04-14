@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	backgroundColor="0x000000" alpha="0.85" xmlns:ui="com.views.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.controllers.GameController;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox horizontalAlign="center" verticalGap="25" horizontalCenter="0" verticalCenter="0" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<mx:Label id="displayLabel" text="Really? Are you sure you want to give up?" 
+			styleName="infoBoxHeader" fontSize="35"/>
+		<mx:HBox horizontalGap="10" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+			<ui:IntroButton label="Yup! :(" click="GameController.SINGLETON.onGameLost();"/>
+			<ui:IntroButton label="Hell no! Take me back!" click="GameController.SINGLETON.resume();"/>
+		</mx:HBox>
+	</mx:VBox>
+	
+</mx:Canvas>

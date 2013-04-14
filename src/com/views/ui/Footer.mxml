@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	width="100%" height="40" horizontalCenter="0" bottom="0" clipContent="false"
+	creationComplete="init();">
+	
+	<mx:Script>
+		<![CDATA[
+		
+			import mx.controls.Image;
+			import com.utils.ColorUtil;
+			import com.Constants;
+			import caurina.transitions.Tweener;
+			
+			private function init():void
+			{
+				var shadow:DropShadowFilter = new DropShadowFilter();
+				shadow.inner = true;
+				shadow.color = 0x000000;
+				shadow.angle = 90;
+				shadow.distance = 5;
+				shadow.blurX = shadow.blurY = 7;
+				shadow.alpha = 0.85;
+				bg.filters = [shadow];
+				
+				shadow = new DropShadowFilter();
+				shadow.color = 0x000000;
+				shadow.angle = 90;
+				shadow.distance = 2;
+				shadow.blurX = shadow.blurY = 5;
+				shadow.alpha = 0.25;
+				icons.filters = [shadow];
+				
+				copyright.htmlText = "This is a proof-of-concept brought to you by 2010 SFU Design, Media Arts + Informatics";
+			}
+			
+			public function updateColor(color:uint):void
+			{
+				bg.setStyle('backgroundColor', ColorUtil.getComplementaryColor(color));
+				copyright.setStyle('color', ColorUtil.getTextOverColor(color));
+			}
+			
+			private function sendRequest(id:int):void
+			{
+				var url:String = "";
+				switch(id){
+					case Constants.FOOTER_TWITTER:
+						url = "http://twitter.com/home?status=" + Constants.STATUS_MSG;
+						break;
+					case Constants.FOOTER_FACEBOOK:
+						url = "http://www.facebook.com/sharer.php?u=" + Constants.STATUS_LINK;
+						break;
+					case Constants.FOOTER_MYSPACE:
+						url = "http://www.myspace.com/Modules/PostTo/Pages/?u=" + Constants.STATUS_LINK;
+						break;
+					case Constants.FOOTER_LINKEDIN:
+						url = "http://www.linkedin.com/shareArticle?mini=true&url=" + Constants.STATUS_LINK + "&title=" + Constants.STATUS_MSG;
+						break;
+					case Constants.FOOTER_DELICIOUS:
+						url = "http://delicious.com/save?url=" + Constants.STATUS_LINK + "&title=" + Constants.STATUS_MSG;
+						break;
+					case Constants.FOOTER_DIGG:
+						url = "http://digg.com/submit?url=" + Constants.STATUS_LINK + "&title=DIYTetris - Do it yourself!&bodytext=" + Constants.STATUS_MSG;
+						break;
+				}
+				navigateToURL(new URLRequest(url), '_blank');
+			}
+			
+			private function onMouseOver(e:MouseEvent):void
+			{
+				var img:Image = e.currentTarget as Image;
+				Tweener.addTween(img, {alpha: 0.25, time: 0.25, transition: 'easeInQuad', onComplete: function():void{
+					Tweener.addTween(img, {alpha: 1, time: 0.25, transition: 'easeOutQuad'});
+				}}); 
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="bg" width="100%" height="25" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		horizontalCenter="0" bottom="0" alpha="0.5"/>
+		
+	<mx:Label id="copyright" left="10" verticalCenter="9" letterSpacing="1" alpha="0.75"
+		fontAntiAliasType="advanced" fontFamily="HelveticaRegular" fontSize="9"/>
+		
+	<mx:HBox id="icons" height="35" bottom="5" right="0" horizontalGap="-5" verticalAlign="middle"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<mx:Image source="assets/images/icon_digg.png" buttonMode="true" height="100%"
+			maintainAspectRatio="true" smoothBitmapContent="true"
+			click="sendRequest(Constants.FOOTER_DIGG);"
+			mouseOver="onMouseOver(event);"/>
+		
+		<mx:Image source="assets/images/icon_delicious.png" buttonMode="true" height="100%"
+			maintainAspectRatio="true" smoothBitmapContent="true"
+			click="sendRequest(Constants.FOOTER_DELICIOUS);"
+			mouseOver="onMouseOver(event);"/>
+		
+		<mx:Image source="assets/images/icon_linkedin.png" buttonMode="true" height="100%"
+			maintainAspectRatio="true" smoothBitmapContent="true"
+			click="sendRequest(Constants.FOOTER_LINKEDIN);"
+			mouseOver="onMouseOver(event);"/>
+		
+		<mx:Image source="assets/images/icon_myspace.png" buttonMode="true" height="100%"
+			maintainAspectRatio="true" smoothBitmapContent="true"
+			click="sendRequest(Constants.FOOTER_MYSPACE);"
+			mouseOver="onMouseOver(event);"/>
+		
+		<mx:Image source="assets/images/icon_facebook.png" buttonMode="true" height="100%"
+			maintainAspectRatio="true" smoothBitmapContent="true"
+			click="sendRequest(Constants.FOOTER_FACEBOOK);" 
+			mouseOver="onMouseOver(event);"/>
+		
+		<mx:Image source="assets/images/icon_twitter.png" buttonMode="true" height="100%"
+			maintainAspectRatio="true" smoothBitmapContent="true"
+			click="sendRequest(Constants.FOOTER_TWITTER);"
+			mouseOver="onMouseOver(event);"/>
+		
+	</mx:HBox>
+	
+</mx:Canvas>

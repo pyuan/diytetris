@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	backgroundColor="0x000000" alpha="0.85" xmlns:ui="com.views.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.controllers.LevelCreatorController;
+			import com.Constants;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox horizontalAlign="center" verticalGap="25" horizontalCenter="0" verticalCenter="0" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<mx:Label id="displayLabel" text="{'You gotta be kiddin\' me, at least draw ' + Constants.DEFAULT_LEVELCREATOR_BLOCKS_NUM + ' blocks!'}" 
+			styleName="infoBoxHeader" fontSize="35"/>
+		<ui:IntroButton label="Go Back" click="LevelCreatorController.SINGLETON.hidePopup();"/>
+	</mx:VBox>
+	
+</mx:Canvas>

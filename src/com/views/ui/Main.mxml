@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" xmlns:ui="com.views.ui.*"
+	show="onShow();">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.controllers.ApplicationController;
+			import com.controllers.AudioController;
+			import com.controllers.GameController;
+			import com.controllers.BackgroundManager;
+			import com.Constants;
+			import com.Embeds;
+			
+			private function onPlayClicked():void
+			{
+				ApplicationController.SINGLETON.switchView(Constants.VIEW_PLAY);
+				GameController.SINGLETON.startGame();
+			}
+			
+			private function onShow():void
+			{
+				AudioController.SINGLETON.playSpecificBackgroundMusic(Constants.AUDIO_BACKGROUND_ID_INTRO);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<ui:Logo id="logo"/>
+	
+	<mx:VBox horizontalCenter="100" bottom="150" horizontalAlign="left"
+		horizontalGap="15" verticalGap="15">
+		
+		<ui:IntroButton label="Play!" click="onPlayClicked();"/>
+			
+		<ui:IntroButton label="How to Play?"
+			click="ApplicationController.SINGLETON.switchView(Constants.VIEW_TUTORIAL);"/>
+		
+		<ui:IntroButton label="Who Made This?" 
+			click="ApplicationController.SINGLETON.switchView(Constants.VIEW_CREDITS);"/>
+		
+		<ui:IntroButton label="See the World's Best"
+			click="ApplicationController.SINGLETON.getLeaderboard();"/>
+		
+		<ui:IntroButton label="Make a Level"
+			click="ApplicationController.SINGLETON.switchView(Constants.VIEW_LEVELCREATOR);"/>
+		
+		<ui:AudioButton/>
+		
+	</mx:VBox>
+	
+</mx:Canvas>

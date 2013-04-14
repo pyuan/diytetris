@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	width="{Constants.VIEW_PANE_WIDTH}" height="{Constants.VIEW_PANE_HEIGHT}" rollOut="onMouseOut();"
+	creationComplete="init();" mouseWheel="GameController.SINGLETON.dropToBottom();">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import caurina.transitions.Tweener;
+			import com.views.sprites.SensorPanel;
+			import com.Constants;
+			import com.models.Model;
+			import com.controllers.CustomCursorManager;
+			import com.controllers.DrawController;
+			import com.controllers.GameController;
+			import com.utils.ConvertUtil;
+			
+			public var editMode:Boolean = false;
+			
+			private function init():void
+			{
+				paintBackground();
+				createSensors();
+			}
+			
+			private function paintBackground():void
+			{
+				sensorsContainer.graphics.beginGradientFill(GradientType.LINEAR, [Constants.VIEW_PANE_COLOR_BOTTOM, Constants.VIEW_PANE_COLOR_TOP], 
+					[1, 1], [0, 128], new Matrix(0, -1, 1, 0, height, 0));
+				sensorsContainer.graphics.drawRect(0, 0, this.width, this.height);
+				sensorsContainer.graphics.endFill();
+			}
+			
+			//generate sensor panes to fill viewing pane
+			private function createSensors():void
+			{
+				for(var x:int=0; x<this.width; x+=Constants.BLOCK_WIDTH){
+					for(var y:int=0; y<this.height; y+=Constants.BLOCK_HEIGHT){
+						var sensorPanel:SensorPanel = new SensorPanel(this.editMode);
+						sensorPanel.x = x;
+						sensorPanel.y = y;
+						sensorPanel.name = ConvertUtil.positionToName(new Point(x, y));
+						sensorsContainer.addChild(sensorPanel);
+					}
+				}
+			}
+			
+			private function onMouseDown():void
+			{
+				var model:Model = Model.getInstance();
+				if(!GameController.SINGLETON.isMovingTetrisGroup || model.editMode){
+					DrawController.SINGLETON.startDrawing();
+				}
+			}
+			
+			private function onMouseUp():void
+			{
+				DrawController.SINGLETON.stopDrawing();
+				CustomCursorManager.SINGLETON.setBrushNoCursor();
+			}
+			
+			private function onMouseOut():void
+			{
+				DrawController.SINGLETON.stopDrawing();
+				CustomCursorManager.SINGLETON.setDefautlCursor();
+			}
+			
+			public function showAnimation(source:Class):void
+			{
+				animation.source = source;
+				animation.visible = true;
+				Tweener.addTween(animation, {time: 2, onComplete: function():void{animation.visible=false;}});
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="sensorsContainer" width="100%" height="100%" alpha="0.7"
+		horizontalScrollPolicy="off"  verticalScrollPolicy="off"
+		mouseDown="onMouseDown();" mouseUp="onMouseUp();" rollOut="onMouseOut();"/>
+	
+	<mx:Canvas id="rowsContainer" width="100%" height="100%"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+	
+	<mx:Canvas id="tetrisContainer" width="100%" height="100%" clipContent="true"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+		
+	<mx:Canvas id="graphicsContainer" width="100%" height="100%" clipContent="true"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+		mouseEnabled="false" mouseChildren="false"/>
+		
+	<mx:Canvas id="collision" width="100%" height="100%" 
+		mouseChildren="false" mouseEnabled="false" visible="{Constants.DEBUG_MODE}"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+		
+	<mx:Image id="animation" horizontalCenter="0" verticalCenter="0" visible="false"
+		maintainAspectRatio="true" smoothBitmapContent="true" mouseChildren="false" mouseEnabled="false"/>
+	
+</mx:Canvas>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<leaders>
+  <leader>
+    <name>Paul</name>
+    <score>100</score>
+    <level>1</level>
+    <country>ca</country>
+  </leader>
+  <leader>
+    <name>Paul</name>
+    <score>-100</score>
+    <level>1</level>
+    <country>za</country>
+  </leader>
+</leaders>

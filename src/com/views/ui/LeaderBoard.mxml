@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	show="onShow();" creationComplete="onShow();" xmlns:ui="com.views.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Spacer;
+			import mx.controls.Image;
+		
+			import mx.containers.HBox;
+			import com.models.LeaderModel;
+			import mx.controls.Label;
+			import com.models.Model;
+			import com.controllers.ApplicationController;
+			import com.Constants;
+			
+			private function onShow():void
+			{
+				var model:Model = Model.getInstance();
+				grid.removeAllChildren();
+				
+				//add headers
+				var header:Label = new Label();
+				header.text = "Leaderboard"
+				header.styleName = "infoBoxHeader";
+				header.setStyle('fontSize', 40);
+				grid.addChild(header);
+				
+				var row:HBox = new HBox();
+				row.setStyle('verticalAlign', 'middle');
+				
+				var label:Label = new Label();
+				label.styleName = "leaderCellTxt";
+				label.width = 75;
+				label.text = "Rank";
+				row.addChild(label);
+				
+				label = new Label();
+				label.styleName = "leaderCellTxt";
+				label.truncateToFit = true;
+				label.width = 250;
+				label.text = "Name";
+				row.addChild(label);
+				
+				label = new Label();
+				label.styleName = "leaderCellTxt";
+				label.truncateToFit = true;
+				label.width = 100;
+				label.text = "Score";
+				row.addChild(label);
+				
+				label = new Label();
+				label.styleName = "leaderCellTxt";
+				label.truncateToFit = true;
+				label.width = 100;
+				label.text = "Level";
+				row.addChild(label);
+				
+				label = new Label();
+				label.styleName = "leaderCellTxt";
+				label.truncateToFit = true;
+				label.width = 100;
+				label.text = "Country";
+				row.addChild(label);
+				
+				grid.addChild(row);
+				
+				//add table cells
+				if(model.leaders){
+					for(var i:int=0; i<model.leaders.length; i++){
+						var leaderModel:LeaderModel = model.leaders[i] as LeaderModel;
+						row = new HBox();
+						row.setStyle('verticalAlign', 'middle');
+						
+						label = new Label();
+						label.styleName = "leaderCellTxt";
+						label.width = 75;
+						label.text = (i+1) + ".";
+						row.addChild(label);
+						
+						label = new Label();
+						label.styleName = "leaderCellTxt";
+						label.truncateToFit = true;
+						label.width = 250;
+						label.text = leaderModel.name;
+						row.addChild(label);
+						
+						label = new Label();
+						label.styleName = "leaderCellTxt";
+						label.truncateToFit = true;
+						label.width = 100;
+						label.text = leaderModel.score.toString();
+						row.addChild(label);
+						
+						label = new Label();
+						label.styleName = "leaderCellTxt";
+						label.truncateToFit = true;
+						label.width = 100;
+						label.text = leaderModel.level.toString();
+						row.addChild(label);
+						
+						var flag:Image = new Image();
+						flag.maintainAspectRatio = false;
+						flag.smoothBitmapContent = true;
+						flag.width = Constants.IMAGE_FLAG_WIDTH * 2/3;
+						flag.height = Constants.IMAGE_FLAG_HEIGHT * 2/3;
+						flag.source = Constants.DIR_FLAGS + leaderModel.country.toLowerCase() + Constants.EXTENSION_FLAGS;
+						flag.toolTip = leaderModel.country.toUpperCase();
+						row.addChild(flag);
+						
+						var shadow:DropShadowFilter = new DropShadowFilter();
+						shadow.distance = 3;
+						shadow.blurX = shadow.blurY = 5;
+						shadow.alpha = 0.35;
+						row.filters = [shadow];
+						
+						grid.addChild(row);
+					}
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas horizontalScrollPolicy="off" verticalScrollPolicy="off" width="800" height="550"
+		horizontalCenter="0" verticalCenter="0" styleName="overlay">
+		<mx:VBox id="grid" paddingBottom="25" paddingLeft="25" paddingRight="25" paddingTop="25"
+			horizontalScrollPolicy="off" verticalScrollPolicy="auto" maxHeight="400" width="750" 
+			verticalGap="5" horizontalAlign="left" horizontalCenter="0" top="25"/>
+		<ui:SmallIconButton label="Go Back Home" right="25" bottom="25"
+			click="ApplicationController.SINGLETON.switchView(Constants.VIEW_MAIN);"/>
+	</mx:Canvas>
+		
+</mx:Canvas>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="154" height="101"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" clipContent="false" 
+	creationComplete="init();">
+	
+	<mx:Script>
+		<![CDATA[
+		
+			import mx.binding.utils.BindingUtils;
+			import com.utils.ColorUtil;
+			
+			[Bindable]
+			public var bgColor:uint = 0;
+			
+			[Bindable]
+			public var displayTxt:String = "0";
+			
+			private function init():void
+			{
+				BindingUtils.bindSetter(updateBg, this, "bgColor");
+			}
+			
+			private function updateBg(e:uint):void
+			{
+				display.graphics.clear();
+				display.graphics.beginFill(bgColor, 0.5);
+				display.graphics.moveTo(20, 65);
+				display.graphics.lineTo(145, 65);
+				display.graphics.lineTo(145, 93);
+				display.graphics.lineTo(27, 93);
+				display.graphics.lineTo(20, 65);
+				display.graphics.endFill();
+				displayLabel.setStyle('color', ColorUtil.getTextOverColor(bgColor)); 
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="display" backgroundImage="assets/images/bg_time.png" width="100%" height="100%"
+		x="{-this.width}" verticalCenter="0" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<mx:Label id="displayLabel" text="{displayTxt}" styleName="infoBoxHeader" 
+			width="117" height="29" x="24" y="64" truncateToFit="true"/>
+		
+	</mx:Canvas>
+	
+</mx:Canvas>

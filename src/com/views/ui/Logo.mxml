@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	x="50" y="50">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.Constants;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Image id="logo" source="{Constants.IMAGE_LOGO_SMALL}" smoothBitmapContent="true"/> 
+	
+	<mx:Label id="version" text="{Constants.VERSION_NUM}" 
+		styleName="infoBoxHeader" fontSize="15" color="0x13a1f3"
+		x="{logo.x + logo.width - version.width - 10}" y="65"/>
+		
+</mx:Canvas>

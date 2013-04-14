@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="init();"
+	show="onShow();" xmlns:ui="com.views.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+		
+			import com.models.Model;
+			import caurina.transitions.Tweener;
+			import com.controllers.BackgroundManager;
+			import com.controllers.AudioController;
+			import com.controllers.ApplicationController;
+			import com.Constants;
+			
+			private function init():void
+			{
+				var model:Model = Model.getInstance();
+				countries.dataProvider = model.flags;
+				countries.selectedItem = Constants.DEFAULT_COUNTRY;
+				countries.validateNow();
+				
+				var shadow:DropShadowFilter = new DropShadowFilter();
+				shadow.distance = 3;
+				shadow.blurX = shadow.blurY = 5;
+				shadow.alpha = 0.35;
+				flag.filters = [shadow];
+				
+				onShow();
+			}
+			
+			private function onShow():void
+			{
+				userForm.visible = false;
+				BackgroundManager.SINGLETON.showSpecificBackground(Constants.IMAGE_BACKGROUND_ID_GAMEOVER);
+				AudioController.SINGLETON.stopBackgroundMusic();
+				AudioController.SINGLETON.playSfx(Constants.AUDIO_GAME_OVER);
+				this.y = -this.height;
+				Tweener.addTween(this, {y: 0, time: 1, transition: 'easeOutBounce'});
+				
+				//check if user qualifies for leaderboard
+				var model:Model = Model.getInstance();
+				info.text = 'Score: '+ model.points + ' level: ' + model.level;
+				ApplicationController.SINGLETON.checkLeaderboard(model.points, onLeaderboardResponse);
+			}
+			
+			private function onLeaderboardResponse(isLeader:int):void
+			{
+				if(isLeader == 1){
+					userForm.visible = true;
+				}
+				else{
+					userForm.visible = false;
+				}
+			}
+			
+			private function backToMain():void
+			{
+				BackgroundManager.SINGLETON.showNewBackgroundImg();
+				ApplicationController.SINGLETON.switchView(Constants.VIEW_MAIN);
+			}
+			
+			private function submit():void
+			{
+				var model:Model = Model.getInstance();
+				var name:String = nameField.text;
+				if(name.length == 0 || name == " "){
+					name = "Anonymous";
+				}
+				var score:int = model.points;
+				var level:int = model.level;
+				var country:String = countries.selectedItem.toString().toLowerCase();
+				ApplicationController.SINGLETON.addLeader(name, score, level, country);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<ui:IntroButton label="Go Back Home" click="backToMain();" horizontalCenter="0" verticalCenter="100"/> 
+	
+	<mx:VBox id="userForm" width="1024" horizontalCenter="0" top="75" horizontalAlign="center"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off" visible="false" verticalGap="10">
+		
+		<mx:Label text="Hey cheer up, at least you made the leaderboard." styleName="failTxt"/>
+			
+		<mx:HBox horizontalGap="2" verticalAlign="middle">
+			<mx:Label text="Name: " styleName="failTxt"/>
+			<mx:TextInput id="nameField" styleName="infoBoxHeader" borderThickness="0" backgroundAlpha="0.25"
+				borderStyle="none" focusThickness="0" fontSize="50"/>
+			<mx:Spacer width="10"/>
+			
+			<mx:Label id="info" styleName="failTxt"/>
+			<mx:Spacer width="10"/>
+			
+			<mx:Label text="Country: " styleName="failTxt"/>
+			<mx:Image id="flag" maintainAspectRatio="false" smoothBitmapContent="true" 
+				height="{Constants.IMAGE_FLAG_HEIGHT}" width="{Constants.IMAGE_FLAG_WIDTH}"
+				source="{Constants.DIR_FLAGS + countries.selectedItem.toString().toLowerCase() + Constants.EXTENSION_FLAGS}"/>
+			<mx:Spacer width="10"/>
+			<mx:ComboBox id="countries" styleName="infoBoxHeader"/>
+			
+			<mx:Spacer width="5"/>
+			<ui:SmallIconButton label="Submit" click="submit();"/>
+		</mx:HBox>
+		
+	</mx:VBox>
+	
+</mx:Canvas>

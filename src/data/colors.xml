@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colors>
+	
+	<color>
+		<name>Green</name>
+		<value>0x19d415</value>
+	</color>
+	
+	<color>
+		<name>Blue</name>
+		<value>0x13a1f3</value>
+	</color>
+	
+	<color>
+		<name>Red</name>
+		<value>0xf31313</value>
+	</color>
+	
+	<color>
+		<name>Pink</name>
+		<value>0xf313f0</value>
+	</color>
+	
+	<color>
+		<name>Cyan</name>
+		<value>0x1ddbd0</value>
+	</color>
+	
+	<color>
+		<name>Gold</name>
+		<value>0xf9c513</value>
+	</color>
+	
+	<color>
+		<name>Orange</name>
+		<value>0xf95e13</value>
+	</color>
+	
+	<color>
+		<name>Purple</name>
+		<value>0x8413f9</value>
+	</color>
+	
+	<color>
+		<name>Dark Green</name>
+		<value>0x226016</value>
+	</color>
+	
+</colors>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	horizontalCenter="0" verticalCenter="0" creationComplete="init();">
+	
+	<mx:Script>
+		<![CDATA[
+		
+			import com.Constants;
+			
+			[Bindable]
+			private var bytesLoaded:int = 0;
+			
+			[Bindable]
+			private var bytesTotal:int = 0;
+			
+			private function init():void
+			{
+				setData(this.bytesLoaded, this.bytesTotal);
+			}
+			
+			public function setData(bytesLoaded:int, bytesTotal:int):void
+			{
+				this.bytesLoaded = bytesLoaded;
+				this.bytesTotal = bytesTotal;
+				
+				if(this.bytesLoaded >= bytesTotal){
+					this.visible = false;
+				}
+				else{
+					this.visible = true;
+				}
+			}			
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox id="container" horizontalCenter="0" verticalCenter="0"
+		styleName="overlay" clipContent="true"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		verticalGap="50" horizontalAlign="center">
+		
+		<mx:Image source="{Constants.IMAGE_LOGO_SMALL}" smoothBitmapContent="true"/> 
+		
+		<mx:Label fontAntiAliasType="advanced" fontFamily="BauhausBold" fontWeight="bold" 
+			color="0xFFFFFF" fontSize="25"
+			textAlign="center" text="{Math.round(this.bytesLoaded/this.bytesTotal*100) + '% loaded...'}"/>
+		
+	</mx:VBox>
+	
+</mx:Canvas>

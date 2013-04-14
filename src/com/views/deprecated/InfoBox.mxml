@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="125" height="70"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="init();">
+	
+	<mx:Script>
+		<![CDATA[
+		
+			import mx.binding.utils.BindingUtils;
+			import com.utils.ColorUtil;
+		
+			[Bindable]
+			public var bgColor:uint = 0;
+			
+			[Bindable]
+			public var headerTxt:String = "";
+			
+			[Bindable]
+			public var displayTxt:String = "";
+			
+			private function init():void
+			{
+				header.graphics.beginFill(0x000000, 0.9);
+				header.graphics.drawRoundRectComplex(0, 0, header.width, header.height, 20, 20, 0, 0);
+				header.graphics.endFill();
+				
+				var shadow:DropShadowFilter = new DropShadowFilter();
+				shadow.alpha = 0.15;
+				shadow.angle = 60;
+				shadow.blurX = shadow.blurY = 15;
+				shadow.distance = 3;
+				this.filters = [shadow];
+				
+				BindingUtils.bindSetter(updateBg, this, "bgColor");
+			}
+			
+			private function updateBg(e:uint):void
+			{
+				display.graphics.clear();
+				display.graphics.beginFill(bgColor, 0.5);
+				display.graphics.drawRoundRectComplex(0, 0, display.width, display.height, 0, 0, 10, 10);
+				display.graphics.endFill();
+				displayLabel.setStyle('color', ColorUtil.getTextOverColor(bgColor));
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="header" width="100%" height="35" x="0" y="0" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<mx:Label text="{headerTxt}" styleName="infoBoxHeader" width="100%" 
+			verticalCenter="0" truncateToFit="true"/>
+			
+	</mx:Canvas>
+	
+	<mx:Canvas id="display" width="100%" height="35" x="0" bottom="0"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<mx:Label id="displayLabel" text="{displayTxt}" styleName="infoBoxHeader" 
+			width="100%" verticalCenter="0" truncateToFit="true"/>
+		
+	</mx:Canvas>
+	
+</mx:Canvas>

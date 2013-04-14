@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="224" height="188"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" clipContent="false" 
+	xmlns:ui="com.views.ui.*" creationComplete="init();">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ListEvent;
+			import com.models.Model;
+			import com.models.ColorModel;
+			import com.Constants;
+			import com.Embeds;
+			import com.controllers.ApplicationController;
+			import com.controllers.LevelCreatorController;
+			
+			private function init():void
+			{
+				var model:Model = Model.getInstance();
+				var data:Array = [];
+				for(var i:int=0; i<model.colors.length; i++){
+					data.push(ColorModel(model.colors[i]).getName());
+				}
+				colors.dataProvider = data;
+				colors.dispatchEvent(new ListEvent(ListEvent.CHANGE));
+			}
+			
+			public function onColorChange():void
+			{
+				if(colors){
+					var model:Model = Model.getInstance();
+					for(var i:int=0; i<model.colors.length; i++){
+						var cm:ColorModel = model.colors[i] as ColorModel;
+						if(colors.selectedItem == cm.getName()){
+							model.currentColor = cm.getValue();
+							swatch.setStyle('backgroundColor', cm.getValue());
+							break;
+						}
+					}
+				}
+				
+			}
+			
+			private function saveAndPlay():void
+			{
+				LevelCreatorController.SINGLETON.saveLevel();
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas backgroundImage="assets/images/bg_main.png" width="100%" height="100%"
+		x="{-this.width}" verticalCenter="0" 
+		horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		
+		<mx:Image source="{Constants.IMAGE_LOGO_SMALL}" smoothBitmapContent="true"
+			horizontalCenter="-15" y="5" width="195"/> 
+		
+		<mx:VBox horizontalScrollPolicy="off" verticalScrollPolicy="off" verticalGap="10"
+			horizontalAlign="center" y="90" horizontalCenter="-10">
+			
+			<mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off"
+				horizontalGap="10" verticalAlign="middle">
+				
+				<mx:Canvas id="swatch" width="15" height="15" borderColor="0xFFFFFF" 
+					borderStyle="solid" borderThickness="1"
+					horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+				
+				<mx:ComboBox id="colors" change="onColorChange();"/>
+				
+			</mx:HBox>
+			
+			<mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off"
+				horizontalGap="10" verticalAlign="middle">
+				
+				<ui:SmallIconButton icon="{Embeds.ICON_SMALL_PLAY}"
+					click="saveAndPlay();"/>
+				
+				<ui:SmallIconButton icon="{Embeds.ICON_SMALL_HOME}"
+					click="ApplicationController.SINGLETON.switchView(Constants.VIEW_MAIN);"/>
+				
+				<ui:AudioButtonSmall/>
+				
+			</mx:HBox>
+			
+		</mx:VBox>
+		
+	</mx:Canvas>
+	
+</mx:Canvas>
